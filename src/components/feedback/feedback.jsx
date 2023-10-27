@@ -11,28 +11,27 @@ export class Feedback extends Component {
     bad: 0,
   };
 
-  constructor() {
-    super();
-    this.handleCounter = this.handleCounter.bind(this);
-  }
-
   countTotalFeedback = () => {
     return this.state.good + this.state.neutral + this.state.bad;
   };
 
   countPositiveFeedbackPercentage = () => {
-    if (this.state.good) {
-      return Math.round((this.state.good * 100) / this.countTotalFeedback());
+    let persentage = 0;
+    console.log(this.state.good);
+    if (this.state.good > 0) {
+      persentage = Math.round(
+        (this.state.good * 100) / this.countTotalFeedback()
+      );
     }
+    return persentage;
   };
 
   handleCounter = evt => {
-    let prevState = this.state;
     let key = evt.target.name;
 
-    this.setState({
+    this.setState(prevState => ({
       [key]: prevState[key] + 1,
-    });
+    }));
   };
 
   render() {
